@@ -1,7 +1,7 @@
 # terminal-tris
 Terminal-based guideline-conforming tetra-block stacking game. Uses ncurses for console printing.
 
-![terminaltris gameplay](assets/matrix.png)
+![terminaltris gameplay](matrix.png)
 
 Well, mostly guideline-conforming:
 - Uses the SRS rotation system (i know, i know, but T-spin triples are just too good). 
