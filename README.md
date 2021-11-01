@@ -16,8 +16,6 @@ Well, mostly guideline-conforming:
 - The only mode so far is endless marathon. Time-based lineclear objective modes are set for the future.
 - There is no music. Sorry!
 
-When compiling make sure to link ncurses:
-- [whatever compiler] *.c \-lncurses
-
+Compile with ```make```
 
 You must have ncurses installed, find it [here](https://invisible-island.net/ncurses/)
