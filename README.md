@@ -10,7 +10,7 @@ Well, mostly guideline-conforming:
 - Mini Tspins do not exist. Even if a Tspin uses a wallkick if it is immobile it gives full Tspin points.
 - Perfect clears do not use some weird score table, rather they simply multiply whatever amount of points you would have gotten by 5.
 - Topping out (a block locks above the top edge of the playfield) immediately ends the game. Blocking out (a new piece attempts to spawn but overlaps a block) is impossible because a piece will not drop down from above the playfield if it would overlap.
-- The gravity starts out at 1/60 G, or falling one block per second. This remains constant through the first 4 levels because there is not enough resolution to really separate them. This is not a big deal.
+- The gravity starts out at 1/60 G, or falling one block per second by default. The framerate is user-configurable, but the relative timing is not (1/60 G is always the case at level 1).
 - At level 19. gravity reaches 20G. From there on to the maximum level 30, delays get shorter, e.g. lock delay starts out at 0.5 seconds, but shorten down to a ludicrous 0.1 seconds at level 30. Good luck.
 - The controls are so far noncustomizable: Left/Right arrows control shifting, Down arrow soft drops (no locking), Up arrow rotates CW, Z rotates CCW, C holds, and the spacebar hard locks.
 - The only mode so far is endless marathon. Time-based lineclear objective modes are set for the future.

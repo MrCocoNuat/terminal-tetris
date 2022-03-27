@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
 
   long int microsStart = microsNow;//time at start of game
   
-  int framerate = 60; //set this at will, but keep it reasonable!
+  int framerate = 60; //set this at will, but keep it reasonable! default 60
   int microsPerFrame = 1000000/framerate;
   
   /* gameplay flags */
@@ -47,9 +47,15 @@ int main(int argc, char *argv[]){
   int mustClear = 0; //prevents harddrop from constantly causing lineclear delay
 
   //the velocity table for levels 0-18
-  static int velocityTable[] = {0, 1, 1, 1, 2, 3, 4, 5, 7, 11, 16, 23, 35, 55, 87, 142, 235, 397, 686};
-  //for 19- the velocity is always 1200 (20G)
-  //divide by framerate (60) for G values
+  static double velocityTable[] = {0.01,
+    0.016666, 0.024712, 0.036642, 0.054331, 0.080558, 0.119447,
+    0.177110, 0.262608, 0.389380, 0.577350, 0.856061, 1.269319,
+    1.882072, 2.790628, 4.137781, 6.135262, 9.097012, 13.48852};
+  //stored as G values, i.e. how many gravity events happen per frame
+  //for 19+ the velocity is always 20G
+  //defined so that at 60fps (the default) level 1 has 1 second between gravity
+  //and exponentially interpolated
+  
   
   //delays decrease for levels 20-30, proportional to this table
   static int delayTable[] = {29, 25, 22, 19, 17, 15, 13, 11, 9, 8, 7, 6};
@@ -58,7 +64,6 @@ int main(int argc, char *argv[]){
   /* gameplay variables */
   int level = 1; //level determines many timing parameters
   int linesPerLevel = 10; //clear 10(x-1) lines in total to reach level x
-  int velocity = 1; //to convert this to a G value, divide by framerate
   int lines = 0; //lines cleared in total
   int score = 0; //score
   int backToBack = 0; //whether the last lineclear was "difficult"
@@ -79,7 +84,7 @@ int main(int argc, char *argv[]){
   int levelupPeriod = 60*microsPerFrame;
   long int levelupDeadline = microsNow;
   //write down a levelup event for up to 1 second
-  int gravityPeriod = 1000000/velocity;
+  int gravityPeriod = (int) (microsPerFrame/velocityTable[level]);
   long int gravityDeadline = microsNow;
   //minos fall variable units per second
   int lockPeriod = 30*microsPerFrame;
@@ -232,7 +237,7 @@ int main(int argc, char *argv[]){
 	  refreshInterface();
 
 	  level = newLevel;
-	  gravityPeriod = 1000000/((level > 18)? 1200 : velocityTable[level]);
+	  gravityPeriod = (int) (microsPerFrame/((level > 18)? 20 : velocityTable[level]));
 	  lockPeriod = clearPeriod = ((level < 20)? 30 : delayTable[level - 20])*microsPerFrame;
 	}
 	
