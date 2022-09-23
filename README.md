@@ -19,3 +19,5 @@ Well, mostly guideline-conforming:
 Compile with ```make```
 
 You must have ncurses installed, find it [here](https://invisible-island.net/ncurses/)
+
+or try ```<package manager of choice> install ncurses-devel```
